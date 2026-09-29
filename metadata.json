@@ -1,0 +1,6 @@
+{
+  "name": "hawa",
+  "description": "An innovative glass-transparent Digital Audio Workstation inspired by Logic Pro with 3D spatial acoustics, built-in synthesizers, and beginner-friendly composition tools.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
