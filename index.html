@@ -4,19 +4,197 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>hawa — Glass Digital Audio Workstation</title>
-    <meta name="description" content="hawa is an innovative glass-transparent Digital Audio Workstation inspired by Logic Pro with 3D spatial acoustics, built-in synthesizers, and beginner-friendly composition tools." />
-    <meta property="og:title" content="hawa — Glass Digital Audio Workstation" />
-    <meta property="og:description" content="hawa is an innovative glass-transparent Digital Audio Workstation inspired by Logic Pro with 3D spatial acoustics, built-in synthesizers, and beginner-friendly composition tools." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐇</text></svg>" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="hawa is an innovative glass-transparent Digital Audio Workstation." />
+    <style>
+      :root {
+        --bg: #faf7f2;
+        --panel: rgba(255,255,255,0.7);
+        --ink: #1c1917;
+        --muted: #78716c;
+        --rose: #fb7185;
+        --rose-dark: #ec4899;
+        --line: rgba(28,25,23,0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #faf7f2 0%, #f5f0e8 100%);
+        color: var(--ink);
+        font-family: "Segoe UI", sans-serif;
+        padding: 24px;
+      }
+
+      .shell {
+        width: min(980px, 100%);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: 0 24px 70px rgba(28,25,23,0.08);
+        backdrop-filter: blur(14px);
+        padding: clamp(24px, 5vw, 52px);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 82px;
+        height: 82px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(251,113,133,0.18), rgba(236,72,153,0.08));
+        font-size: 42px;
+        margin-bottom: 18px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2.5rem, 7vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+      }
+
+      .subtitle {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        color: var(--muted);
+        font-weight: 500;
+        margin-bottom: 18px;
+      }
+
+      .lede {
+        margin: 0 auto 28px;
+        max-width: 720px;
+        font-size: 1.08rem;
+        line-height: 1.7;
+        color: #57534e;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 18px;
+        margin: 28px 0 34px;
+      }
+
+      .card {
+        background: rgba(255,255,255,0.72);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 20px 18px;
+      }
+
+      .card strong {
+        display: block;
+        font-size: 1.02rem;
+        margin-bottom: 8px;
+      }
+
+      .card span {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 18px;
+      }
+
+      a.button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        min-width: 180px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      a.button:hover {
+        transform: translateY(-1px);
+      }
+
+      .primary {
+        background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+        color: white;
+        box-shadow: 0 12px 28px rgba(251, 113, 133, 0.28);
+      }
+
+      .secondary {
+        background: rgba(255,255,255,0.8);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .status {
+        margin-top: 22px;
+        border-radius: 14px;
+        border: 1px solid rgba(16,185,129,0.2);
+        background: rgba(16,185,129,0.08);
+        padding: 16px 18px;
+      }
+
+      .status strong {
+        color: #047857;
+      }
+
+      .status span {
+        color: #44403c;
+      }
+    </style>
   </head>
-  <body class="bg-[#faf7f2] text-stone-800 overflow-x-hidden selection:bg-rose-200 selection:text-rose-900">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <main class="shell">
+      <div class="badge">🐇</div>
+      <h1>hawa</h1>
+      <div class="subtitle">Glass Digital Audio Workstation</div>
+
+      <p class="lede">
+        This project is configured as a GitHub Pages site and is ready to be published. The app itself is a Vite/React project, so GitHub Pages must serve the built static output from the deployment workflow.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <strong>🎵 Studio Workflow</strong>
+          <span>Timeline, synths, drum machine, and spatial mixing tools.</span>
+        </div>
+        <div class="card">
+          <strong>🌐 Web Publishing</strong>
+          <span>GitHub Pages deploys the public build once the workflow runs cleanly.</span>
+        </div>
+        <div class="card">
+          <strong>🎹 Creative Tools</strong>
+          <span>Built for DAW-style composition, editing, and experimentation.</span>
+        </div>
+        <div class="card">
+          <strong>🔊 Ready to Ship</strong>
+          <span>Static deployment is supported, with the browser receiving the compiled assets.</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="button primary" href="https://github.com/hawasoftware/hawasoftware.github.io/actions">Open Actions</a>
+        <a class="button secondary" href="https://github.com/hawasoftware/hawasoftware.github.io">Open Repository</a>
+      </div>
+
+      <div class="status">
+        <strong>GitHub Pages status:</strong>
+        <span> Pages is enabled for this repository and the site is ready to publish from the deployment workflow.</span>
+      </div>
+    </main>
   </body>
 </html>
-
