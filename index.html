@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hawa Software</title>
+  <meta name="description" content="Hawa Software — building things for the web." />
+
+  <!-- Favicon from mainassets repo -->
+  <link rel="icon" href="https://raw.githubusercontent.com/hawasoftware/mainassets/main/logo.png" />
+
+  <style>
+    :root{
+      --theme:        #0082C8;
+      --theme-light:  #46b6f5;
+      --theme-deep:   #004e7a;
+      --ink:          #eaf6ff;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+
+    html, body{
+      min-height:100%;
+      background:#04070c;
+    }
+
+    body{
+      font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x:hidden;
+    }
+
+    /* ---------- Background image from mainassets repo ---------- */
+    .bg-photo{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      background-image:url("https://raw.githubusercontent.com/hawasoftware/mainassets/main/Gemini_Generated_Image_y6zs3ny6zs3ny6zs.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+
+    /* ---------- Colour wash ---------- */
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(0,130,200,.20) 0%, transparent 60%),
+        linear-gradient(180deg,
+          rgba(4,7,12,.82) 0%,
+          rgba(4,7,12,.58) 45%,
+          rgba(4,7,12,.86) 100%);
+    }
+
+    /* ---------- Content ---------- */
+    .content{
+      position:relative;
+      z-index:2;
+      width:100%;
+      max-width:760px;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 26px;
+    }
+
+    /* ---------- Logo ---------- */
+    .logo-wrap{
+      position:relative;
+      width: 130px;
+      height: 130px;
+      display:grid;
+      place-items:center;
+    }
+
+    .logo-wrap::before{
+      content:"";
+      position:absolute;
+      inset:-14px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(0,130,200,.50) 0%, transparent 70%);
+      filter: blur(16px);
+      pointer-events:none;
+    }
+
+    .logo-wrap::after{
+      content:"";
+      position:absolute;
+      inset:-6px;
+      border-radius:50%;
+      border:1px solid rgba(0,130,200,.55);
+      box-shadow:
+        0 0 24px rgba(0,130,200,.45),
+        inset 0 0 18px rgba(0,130,200,.22);
+      pointer-events:none;
+    }
+
+    .logo{
+      position:relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #04070c;
+      box-shadow:
+        0 12px 34px -12px rgba(0,130,200,.85),
+        0 0 0 3px rgba(0,130,200,.18);
+    }
+
+    h1{
+      font-size: clamp(2.2rem, 7.4vw, 4.2rem);
+      font-weight:800;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      background: linear-gradient(180deg, #ffffff 0%, #bfe6ff 45%, var(--theme) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      filter: drop-shadow(0 0 22px rgba(0,130,200,.45));
+    }
+
+    .tagline{
+      font-size: clamp(.95rem, 2.6vw, 1.12rem);
+      line-height:1.65;
+      color:rgba(210,235,255,.72);
+      max-width:520px;
+    }
+
+    /* ---------- Actions ---------- */
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:18px;
+      margin-top:8px;
+    }
+
+    .btn{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:15px 34px;
+      font-size:1rem;
+      font-weight:600;
+      letter-spacing:.02em;
+      color:var(--ink);
+      text-decoration:none;
+      border-radius:100px;
+      border:1px solid rgba(0,130,200,.55);
+      background:rgba(0,130,200,.13);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow:hidden;
+      transition: background .35s ease,
+                  border-color .35s ease,
+                  box-shadow .35s ease;
+      box-shadow:
+        0 6px 22px -10px rgba(0,130,200,.85),
+        inset 0 1px 0 rgba(255,255,255,.10);
+    }
+
+    .btn svg{
+      width:21px; height:21px;
+      flex:0 0 auto;
+      fill: currentColor;
+    }
+
+    .btn:hover,
+    .btn:focus-visible{
+      background: rgba(0,130,200,.30);
+      border-color: var(--theme-light);
+      box-shadow:
+        0 12px 30px -12px rgba(0,130,200,.95),
+        0 0 26px rgba(0,130,200,.38),
+        inset 0 1px 0 rgba(255,255,255,.18);
+      outline:none;
+    }
+
+    .btn.youtube:hover,
+    .btn.youtube:focus-visible{
+      border-color:#ff5a5a;
+      box-shadow:
+        0 12px 30px -12px rgba(255,60,60,.85),
+        0 0 26px rgba(255,60,60,.35),
+        inset 0 1px 0 rgba(255,255,255,.18);
+    }
+
+    @media (max-width:480px){
+      .btn{ padding:13px 26px; font-size:.94rem; }
+      .actions{ gap:14px; }
+      .logo-wrap{ width:108px; height:108px; }
+      .logo{ width:100px; height:100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background image from mainassets repo -->
+  <div class="bg-photo" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <main class="content">
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <img class="logo"
+           src="https://raw.githubusercontent.com/hawasoftware/mainassets/main/logo.png"
+           alt="Hawa Software logo"
+           onerror="if(!this.dataset.t){this.dataset.t=1;this.src='https://raw.githubusercontent.com/hawasoftware/mainassets/main/logo.jpg';}else if(this.dataset.t==1){this.dataset.t=2;this.src='https://raw.githubusercontent.com/hawasoftware/mainassets/main/Logo.png';}" />
+    </div>
+
+    <h1>Building&nbsp;Ideas<br>Into&nbsp;Reality</h1>
+
+    <p class="tagline">
+      Clean code, thoughtful design and a passion for creating things
+      that live on the web. Find me on the platforms below.
+    </p>
+
+    <div class="actions">
+
+      <!-- YouTube -->
+      <a class="btn youtube"
+         href="https://www.youtube.com/@hawasoftware"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/>
+        </svg>
+        <span>YouTube</span>
+      </a>
+
+      <!-- GitHub -->
+      <a class="btn github"
+         href="https://github.com/hawasoftware"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58l-.01-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.23-.12-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.23 0 4.63-2.81 5.65-5.49 5.95.43.37.81 1.1.81 2.22l-.01 3.29c0 .32.21.7.82.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+
+    </div>
+  </main>
+
+</body>
+</html>
